@@ -69,4 +69,10 @@ public class TaskController {
     ) {
         return taskService.getTasksByPriority(priority);
     }
+    @GetMapping("/search")
+    public List<TaskResponse> searchTasks(
+            @RequestParam String keyword
+    ) {
+        return taskService.searchTasks(keyword);
+    }
 }

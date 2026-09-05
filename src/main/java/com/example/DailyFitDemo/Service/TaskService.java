@@ -162,4 +162,21 @@ public class TaskService {
                 ))
                 .toList();
     }
+    public List<TaskResponse> searchTasks(String keyword) {
+
+        List<Task> tasks =
+                taskRepository.findByTitleContainingIgnoreCase(keyword);
+
+        return tasks.stream()
+                .map(task -> new TaskResponse(
+                        task.getId(),
+                        task.getTitle(),
+                        task.getDescription(),
+                        task.isCompleted(),
+                        task.getTaskDate(),
+                        task.getPriority(),
+                        task.getCategory()
+                ))
+                .toList();
+    }
 }
