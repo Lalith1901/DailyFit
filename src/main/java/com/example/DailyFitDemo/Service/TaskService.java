@@ -6,6 +6,8 @@ import com.example.DailyFitDemo.Repository.TaskRepository;
 import com.example.DailyFitDemo.dto.TaskRequest;
 import com.example.DailyFitDemo.dto.TaskResponse;
 import org.springframework.stereotype.Service;
+import com.example.DailyFitDemo.Model.Category;
+import com.example.DailyFitDemo.Model.Priority;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -115,6 +117,38 @@ public class TaskService {
     public List<TaskResponse> getTasksByDate(LocalDate taskDate) {
 
         List<Task> tasks = taskRepository.findByTaskDate(taskDate);
+
+        return tasks.stream()
+                .map(task -> new TaskResponse(
+                        task.getId(),
+                        task.getTitle(),
+                        task.getDescription(),
+                        task.isCompleted(),
+                        task.getTaskDate(),
+                        task.getPriority(),
+                        task.getCategory()
+                ))
+                .toList();
+    }
+    public List<TaskResponse> getTasksByCategory(Category category) {
+
+        List<Task> tasks = taskRepository.findByCategory(category);
+
+        return tasks.stream()
+                .map(task -> new TaskResponse(
+                        task.getId(),
+                        task.getTitle(),
+                        task.getDescription(),
+                        task.isCompleted(),
+                        task.getTaskDate(),
+                        task.getPriority(),
+                        task.getCategory()
+                ))
+                .toList();
+    }
+    public List<TaskResponse> getTasksByPriority(Priority priority) {
+
+        List<Task> tasks = taskRepository.findByPriority(priority);
 
         return tasks.stream()
                 .map(task -> new TaskResponse(

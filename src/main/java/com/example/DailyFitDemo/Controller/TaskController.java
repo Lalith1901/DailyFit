@@ -6,6 +6,8 @@ import com.example.DailyFitDemo.dto.TaskRequest;
 import com.example.DailyFitDemo.dto.TaskResponse;
 import org.springframework.web.bind.annotation.*;
 import com.example.DailyFitDemo.dto.TaskResponse;
+import com.example.DailyFitDemo.Model.Category;
+import com.example.DailyFitDemo.Model.Priority;
 
 import jakarta.validation.Valid;
 
@@ -54,5 +56,17 @@ public class TaskController {
             @PathVariable LocalDate taskDate) {
 
         return taskService.getTasksByDate(taskDate);
+    }
+    @GetMapping("/category/{category}")
+    public List<TaskResponse> getTasksByCategory(
+            @PathVariable Category category
+    ) {
+        return taskService.getTasksByCategory(category);
+    }
+    @GetMapping("/priority/{priority}")
+    public List<TaskResponse> getTasksByPriority(
+            @PathVariable Priority priority
+    ) {
+        return taskService.getTasksByPriority(priority);
     }
 }
