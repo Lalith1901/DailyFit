@@ -6,6 +6,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import java.time.LocalDate;
 
 @Entity
@@ -19,7 +21,12 @@ public class Task {
     private String title;
     private String description;
     private boolean completed;
+    @Enumerated(EnumType.STRING)
+    private Priority priority;
+    @Enumerated(EnumType.STRING)
+    private Category category;
     private LocalDate taskDate;
+
 
     public LocalDate getTaskDate() {
         return taskDate;
@@ -59,6 +66,20 @@ public class Task {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
 }
